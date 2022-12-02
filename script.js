@@ -13,7 +13,7 @@ function writePassword() {
 
 function generatePassword(){
   var lowerCase = "abcdefghijklmnopqrstuvwxyz"
-  var uppercase = "IDOWHATISREQUIRED"
+  var upperCase = "IDOWHATISREQUIRED"
   var numbers = "0123456789"
   var symbols = "!@#$%^&*()_+~"
 
@@ -22,7 +22,45 @@ function generatePassword(){
   if(passwordLength<8 || passwordLength>126 || isNaN(passwordLength)){
     return "Inavlid Length entered.... Please enter a valid length"
   }
-}
+  var acceptLowerCase = confirm("Do you like lowecase letters in your password?")
 
+  var acceptUpperCase = confirm("Do you like Uppercase letters in your password?")
+
+  var acceptNumbers  = confirm("Do you like numbers in your password?") 
+
+  var acceptSymbols = confirm("Do you like symbols  in your password?")
+
+  var userChoices = []
+
+  if (acceptLowerCase){
+    userChoices += lowerCase
+  }
+
+  
+  if (acceptUpperCase){
+    userChoices += upperCase
+  }
+
+  if (acceptNumbers){
+    userChoices += numbers
+  }
+
+  if (acceptSymbols){
+    userChoices += symbols
+  }
+
+   console.log(userChoices)
+    if(userChoices.length === 0){
+      return "Please choose at least one option......."
+    }
+
+    var password =""
+    for(let i=0;i<passwordLength;i++){
+      var index = Math.floor(Math.random() * userChoices.length)
+      password += userChoices[index]
+    }
+    return password
+
+}
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
